@@ -28,7 +28,7 @@ server {
 
         if ($scheme != "https") {
                 return 301 https://$host$request_uri;
-        } # managed by Certbot
+        } 
 
         #location / {
                 # First attempt to serve request as file, then
@@ -100,10 +100,10 @@ server {
         index index.html index.htm;
 
         ssl on;
-        ssl_certificate /etc/letsencrypt/live/${domain_name}/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/${domain_name}/privkey.pem; # managed by Certbot
-        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+        ssl_certificate ${crt_file}; 
+        ssl_certificate_key ${key_file}; 
+        include /etc/nginx/options-ssl-nginx.conf; 
+        ssl_dhparam ${dhparams_file}; 
 
         location / {
                 try_files $uri $uri/ =404;
